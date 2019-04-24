@@ -18,7 +18,7 @@ public class Embarcado extends View {
 
     int pxTaxaAnimacao = 100;
     int pxRaioChuva = 5;
-    int pxTaxaAnimacaoMetade = Math.round(pxTaxaAnimacao/2);
+    int pxTaxaAnimacaoMetade = pxTaxaAnimacao/2;
     boolean[][] chuva;
     int lado = pxTaxaAnimacao;
     int altura = lado;
@@ -60,8 +60,8 @@ public class Embarcado extends View {
             paint.setColor(Color.BLACK);
 
         if(chovendo) {
-            int maxLChuva = Math.round(maxLado/pxTaxaAnimacao);
-            int maxAChuva = Math.round(maxAltura/pxTaxaAnimacao);
+            int maxLChuva = maxLado/pxTaxaAnimacao;
+            int maxAChuva = maxAltura/pxTaxaAnimacao;
 
             if (chuva == null) {
                 chuva = new boolean[maxLChuva][maxAChuva];
@@ -83,8 +83,8 @@ public class Embarcado extends View {
                     if (chuva[i][j]) {
                         int iLAnimado = i * pxTaxaAnimacao;
                         int jLAnimado = j * pxTaxaAnimacao;
-                        int iOffset = Math.round((maxLado - (maxLChuva * pxTaxaAnimacao) + pxTaxaAnimacao) / 2);
-                        int jOffset = Math.round((maxAltura - (maxAChuva * pxTaxaAnimacao) + pxTaxaAnimacao) / 2);
+                        int iOffset = (maxLado - (maxLChuva * pxTaxaAnimacao) + pxTaxaAnimacao) / 2;
+                        int jOffset = (maxAltura - (maxAChuva * pxTaxaAnimacao) + pxTaxaAnimacao) / 2;
 
                         for (int k = 0; (iLAnimado + k + iOffset) <= maxLado && k < pxRaioChuva; k++) {
                             for (int l = 0; (jLAnimado + l + jOffset) <= maxAltura && l < pxRaioChuva; l++) {
