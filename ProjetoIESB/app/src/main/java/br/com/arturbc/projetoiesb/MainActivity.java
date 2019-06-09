@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         final Button btnLogin = findViewById(R.id.btnLogin);
         final Button btnCadastrar = findViewById(R.id.btnCadastrar);
 
+        btnLogin.setClickable(false);
+        btnCadastrar.setClickable(false);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 cadastro(MainActivity.this);
             }
         });
+
+        tentarAcessar(MainActivity.this, null);
     }
 
     private void login(@NonNull String email, @NonNull String senha, final Activity atividade) {
@@ -59,11 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> tarefa) {
                 if(tarefa.isSuccessful()) {
-                    FirebaseUser usuario = autenticado.getCurrentUser();
-                    Toast.makeText(atividade, usuario.getUid() + " / " + usuario.getEmail(), Toast.LENGTH_LONG).show();
-                    Intent novaAtividade = new Intent(atividade, Main2Activity.class);
-                    startActivity(novaAtividade);
-                    finish();
+                    tentarAcessar(MainActivity.this, autenticado);
                 } else {
                     Toast.makeText(atividade, "Falha na autenticação", Toast.LENGTH_LONG).show();
                     findViewById(R.id.btnLogin).setClickable(true);
@@ -76,5 +77,23 @@ public class MainActivity extends AppCompatActivity {
     private void cadastro( final Activity atividade) {
         Intent novaAtividade = new Intent(atividade, Main3Activity.class);
         startActivity(novaAtividade);
+    }
+
+    private void tentarAcessar (final Activity atividade, FirebaseAuth autenticado) {
+        if(autenticado == null)
+            autenticado = FirebaseAuth.getInstance();
+
+        FirebaseUser usuario = autenticado.getCurrentUser();
+
+        if(usuario != null) {
+            Toast.makeText(atividade, usuario.getUid() + " / " + usuario.getEmail(), Toast.LENGTH_LONG).show();
+            Intent novaAtividade = new Intent(atividade, Main2Activity.class);
+            startActivity(novaAtividade);
+            finish();
+        } else {
+            Toast.makeText(atividade, "Não logado", Toast.LENGTH_LONG).show();
+            findViewById(R.id.btnLogin).setClickable(true);
+            findViewById(R.id.btnCadastrar).setClickable(true);
+        }
     }
 }

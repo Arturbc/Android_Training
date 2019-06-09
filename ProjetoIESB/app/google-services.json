@@ -13,27 +13,15 @@
           "package_name": "br.com.arturbc.projetoiesb"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "883105508413-c6t7bsbpkofhv63su7e27b77mb9pnqad.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA-fcEMToOdxrFuNqSkhNNuoMOHu5nAl-s"
+          "current_key": "AIzaSyAAoz4XMmoSmN0xeUvG0zmyqwl9bmevdHU"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
           "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
